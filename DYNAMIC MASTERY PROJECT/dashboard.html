@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dashboard | Dynamic Mastery Assessment</title>
+  <link rel="stylesheet" href="style.css"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body class="dashboard-body">
+
+<!-- SIDEBAR -->
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-logo">
+    <div class="logo-icon"><span class="logo-bolt">⚡</span></div>
+    <div class="logo-text">
+      <span class="logo-main">DMA</span>
+      <span class="logo-sub">Mastery</span>
+    </div>
+  </div>
+  <nav class="sidebar-nav">
+    <a href="dashboard.html" class="sn-item active"><span class="sn-icon">🏠</span><span>Dashboard</span></a>
+    <a href="quiz.html" class="sn-item"><span class="sn-icon">🧠</span><span>Practice Quiz</span></a>
+    <a href="subjects.html" class="sn-item"><span class="sn-icon">📚</span><span>Subjects</span></a>
+    <a href="progress.html" class="sn-item"><span class="sn-icon">📈</span><span>My Progress</span></a>
+    <a href="games.html" class="sn-item"><span class="sn-icon">🎮</span><span>Game Zone</span><span class="sn-new">NEW</span></a>
+    <a href="profile.html" class="sn-item"><span class="sn-icon">👤</span><span>Profile</span></a>
+  </nav>
+  <div class="sidebar-bottom">
+    <!-- BACKEND NOTE: Populate user name and exam type from session/API -->
+    <div class="sidebar-user">
+      <div class="su-avatar" id="suAvatar">D</div>
+      <div class="su-info">
+        <span class="su-name" id="suName">David A.</span>
+        <span class="su-type" id="suType">UTME Student</span>
+      </div>
+    </div>
+    <!-- BACKEND NOTE: logout button should clear session and redirect to login -->
+    <a href="login.html" class="sn-item sn-logout"><span class="sn-icon">🚪</span><span>Logout</span></a>
+  </div>
+</aside>
+
+<!-- MAIN CONTENT -->
+<main class="dashboard-main">
+  <header class="dash-header">
+    <button class="sidebar-toggle" id="sidebarToggle">☰</button>
+    <div class="dash-header-content">
+      <!-- BACKEND NOTE: Replace static text with user's first name from session -->
+      <h1 class="dash-welcome">Good morning, <span id="userName">David</span>! 👋</h1>
+      <p class="dash-date" id="dashDate"></p>
+    </div>
+    <div class="dash-header-actions">
+      <button class="theme-toggle" id="themeToggle"><span class="toggle-option active" id="darkOpt">🌙</span><span class="toggle-option" id="lightOpt">☀️</span></button>
+      <div class="streak-badge">
+        <span>🔥</span>
+        <!-- BACKEND NOTE: Replace with user's actual streak from database -->
+        <span id="streakCount">7</span> day streak
+      </div>
+      <a href="quiz.html" class="btn btn-primary">Start Practice</a>
+    </div>
+  </header>
+
+  <div class="dash-content">
+    <!-- OVERVIEW CARDS -->
+    <div class="dash-overview-grid">
+      <div class="ov-card ov-questions">
+        <div class="ov-icon">🎯</div>
+        <div class="ov-info">
+          <!-- BACKEND NOTE: Fetch total questions answered from /api/stats/user -->
+          <span class="ov-num" id="totalAnswered">248</span>
+          <span class="ov-label">Questions Answered</span>
+        </div>
+      </div>
+      <div class="ov-card ov-accuracy">
+        <div class="ov-icon">✅</div>
+        <div class="ov-info">
+          <!-- BACKEND NOTE: Fetch accuracy from /api/stats/user -->
+          <span class="ov-num" id="overallAccuracy">68%</span>
+          <span class="ov-label">Overall Accuracy</span>
+        </div>
+      </div>
+      <div class="ov-card ov-mastered">
+        <div class="ov-icon">🏆</div>
+        <div class="ov-info">
+          <!-- BACKEND NOTE: Count topics with mastery >= 80 from /api/mastery/user -->
+          <span class="ov-num" id="masteredTopics">12</span>
+          <span class="ov-label">Topics Mastered</span>
+        </div>
+      </div>
+      <div class="ov-card ov-weak">
+        <div class="ov-icon">⚠️</div>
+        <div class="ov-info">
+          <!-- BACKEND NOTE: Count topics with mastery < 60 from /api/mastery/user -->
+          <span class="ov-num" id="weakTopics">5</span>
+          <span class="ov-label">Weak Topics</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="dash-two-col">
+      <!-- MASTERY BREAKDOWN -->
+      <section class="dash-card">
+        <div class="dc-header">
+          <h2>Subject Mastery</h2>
+          <a href="progress.html" class="dc-link">View All →</a>
+        </div>
+        <!-- BACKEND NOTE: Fetch mastery scores from /api/mastery/user and populate dynamically -->
+        <div class="mastery-list" id="masteryList">
+          <div class="ml-item">
+            <div class="ml-info">
+              <span class="ml-subject"><span class="ml-dot ml-maths"></span> Mathematics</span>
+              <span class="ml-score" id="mathScore">72%</span>
+            </div>
+            <div class="ml-track"><div class="ml-fill" id="mathFill" style="--w:72%; --clr: var(--accent)"></div></div>
+            <div class="ml-topics">
+              <span class="topic-chip topic-ok">Algebra ✓</span>
+              <span class="topic-chip topic-warn">Calculus ⚠</span>
+              <span class="topic-chip topic-bad">Statistics ✗</span>
+            </div>
+          </div>
+          <div class="ml-item">
+            <div class="ml-info">
+              <span class="ml-subject"><span class="ml-dot ml-english"></span> English</span>
+              <span class="ml-score">88%</span>
+            </div>
+            <div class="ml-track"><div class="ml-fill" style="--w:88%; --clr: #10b981"></div></div>
+            <div class="ml-topics">
+              <span class="topic-chip topic-ok">Comprehension ✓</span>
+              <span class="topic-chip topic-ok">Grammar ✓</span>
+            </div>
+          </div>
+          <div class="ml-item">
+            <div class="ml-info">
+              <span class="ml-subject"><span class="ml-dot ml-bio"></span> Biology</span>
+              <span class="ml-score">55%</span>
+            </div>
+            <div class="ml-track"><div class="ml-fill" style="--w:55%; --clr: #f59e0b"></div></div>
+            <div class="ml-topics">
+              <span class="topic-chip topic-warn">Cell Biology ⚠</span>
+              <span class="topic-chip topic-bad">Genetics ✗</span>
+            </div>
+          </div>
+          <div class="ml-item">
+            <div class="ml-info">
+              <span class="ml-subject"><span class="ml-dot ml-physics"></span> Physics</span>
+              <span class="ml-score">40%</span>
+            </div>
+            <div class="ml-track"><div class="ml-fill" style="--w:40%; --clr: #ef4444"></div></div>
+            <div class="ml-topics">
+              <span class="topic-chip topic-bad">Forces ✗</span>
+              <span class="topic-chip topic-bad">Waves ✗</span>
+            </div>
+          </div>
+          <div class="ml-item">
+            <div class="ml-info">
+              <span class="ml-subject"><span class="ml-dot ml-chem"></span> Chemistry</span>
+              <span class="ml-score">65%</span>
+            </div>
+            <div class="ml-track"><div class="ml-fill" style="--w:65%; --clr: var(--accent)"></div></div>
+            <div class="ml-topics">
+              <span class="topic-chip topic-ok">Periodic Table ✓</span>
+              <span class="topic-chip topic-warn">Organic ⚠</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- RECOMMENDED PRACTICE -->
+      <section class="dash-card">
+        <div class="dc-header">
+          <h2>Recommended for You</h2>
+          <span class="dc-tag">🤖 Adaptive</span>
+        </div>
+        <!-- BACKEND NOTE: Fetch recommendations from /api/recommendations/user (rules-based engine output) -->
+        <div class="recommendations" id="recommendations">
+          <div class="rec-item rec-urgent">
+            <div class="rec-icon">⚠️</div>
+            <div class="rec-info">
+              <span class="rec-label">Weak Area — Practice Now</span>
+              <span class="rec-topic">Physics: Forces & Mechanics</span>
+              <span class="rec-detail">Mastery: 40% — Rule 1 (Remedial Focus) active</span>
+            </div>
+            <a href="quiz.html?subject=physics&topic=forces" class="btn btn-sm btn-danger">Practice</a>
+          </div>
+          <div class="rec-item rec-normal">
+            <div class="rec-icon">📈</div>
+            <div class="rec-info">
+              <span class="rec-label">Next Level — You're Ready</span>
+              <span class="rec-topic">Biology: Genetics & Heredity</span>
+              <span class="rec-detail">Prerequisites met — Rule 4 unlocked</span>
+            </div>
+            <a href="quiz.html?subject=biology&topic=genetics" class="btn btn-sm btn-primary">Start</a>
+          </div>
+          <div class="rec-item rec-cross">
+            <div class="rec-icon">🔗</div>
+            <div class="rec-info">
+              <span class="rec-label">Cross-Subject — Strengthen Links</span>
+              <span class="rec-topic">Math Vectors → Physics Forces</span>
+              <span class="rec-detail">Rule 5 triggered — 74% Maths Vectors mastery</span>
+            </div>
+            <a href="quiz.html?subject=physics&topic=forces&mode=cross" class="btn btn-sm btn-outline">Try</a>
+          </div>
+          <div class="rec-item rec-review">
+            <div class="rec-icon">🔄</div>
+            <div class="rec-info">
+              <span class="rec-label">Spaced Repetition — Keep Sharp</span>
+              <span class="rec-topic">English: Comprehension</span>
+              <span class="rec-detail">Mastery: 88% — Due for review</span>
+            </div>
+            <a href="quiz.html?subject=english&topic=comprehension" class="btn btn-sm btn-outline">Review</a>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- RECENT ACTIVITY & STUDY CALENDAR -->
+    <div class="dash-two-col">
+      <section class="dash-card">
+        <div class="dc-header">
+          <h2>Recent Activity</h2>
+        </div>
+        <!-- BACKEND NOTE: Fetch last 5 sessions from /api/sessions/user -->
+        <div class="activity-list" id="activityList">
+          <div class="act-item">
+            <div class="act-icon act-bio">🧬</div>
+            <div class="act-info">
+              <span class="act-title">Biology — Cell Division</span>
+              <span class="act-meta">20 questions · 75% accuracy · 18 min ago</span>
+            </div>
+            <span class="act-badge badge-ok">+8% mastery</span>
+          </div>
+          <div class="act-item">
+            <div class="act-icon act-maths">📐</div>
+            <div class="act-info">
+              <span class="act-title">Mathematics — Algebra</span>
+              <span class="act-meta">25 questions · 88% accuracy · Yesterday</span>
+            </div>
+            <span class="act-badge badge-great">Mastered!</span>
+          </div>
+          <div class="act-item">
+            <div class="act-icon act-physics">⚡</div>
+            <div class="act-info">
+              <span class="act-title">Physics — Forces</span>
+              <span class="act-meta">15 questions · 40% accuracy · Yesterday</span>
+            </div>
+            <span class="act-badge badge-warn">Needs work</span>
+          </div>
+          <div class="act-item">
+            <div class="act-icon act-chem">⚗️</div>
+            <div class="act-info">
+              <span class="act-title">Chemistry — Bonding</span>
+              <span class="act-meta">20 questions · 65% accuracy · 2 days ago</span>
+            </div>
+            <span class="act-badge badge-ok">+5% mastery</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- STUDY CALENDAR -->
+      <section class="dash-card">
+        <div class="dc-header">
+          <h2>Study Calendar</h2>
+          <span class="dc-tag" id="monthLabel"></span>
+        </div>
+        <div class="study-calendar" id="studyCalendar">
+          <!-- Populated by JS -->
+        </div>
+        <div class="calendar-legend">
+          <span class="cl-item"><span class="cl-dot cl-studied"></span> Studied</span>
+          <span class="cl-item"><span class="cl-dot cl-today"></span> Today</span>
+          <span class="cl-item"><span class="cl-dot cl-none"></span> No activity</span>
+        </div>
+      </section>
+    </div>
+  </div>
+</main>
+
+<script src="app.js"></script>
+</body>
+</html>
