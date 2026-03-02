@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Practice Quiz | Dynamic Mastery Assessment</title>
+  <link rel="stylesheet" href="style.css"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body class="dashboard-body quiz-body">
+<!-- SIDEBAR (same as dashboard) -->
+<div class="sidebar-overlay" id="sidebarOverlay" onclick="document.getElementById('sidebar').classList.remove('open');this.style.display='none'"></div>
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-logo">
+    <div class="logo-icon"><span class="logo-bolt">⚡</span></div>
+    <div class="logo-text"><span class="logo-main">DMA</span><span class="logo-sub">Mastery</span></div>
+  </div>
+  <nav class="sidebar-nav">
+    <a href="dashboard.html" class="sn-item"><span class="sn-icon">🏠</span><span>Dashboard</span></a>
+    <a href="quiz.html" class="sn-item active"><span class="sn-icon">🧠</span><span>Practice Quiz</span></a>
+    <a href="subjects.html" class="sn-item"><span class="sn-icon">📚</span><span>Subjects</span></a>
+    <a href="progress.html" class="sn-item"><span class="sn-icon">📈</span><span>My Progress</span></a>
+    <a href="games.html" class="sn-item"><span class="sn-icon">🎮</span><span>Game Zone</span><span class="sn-new">NEW</span></a>
+    <a href="profile.html" class="sn-item"><span class="sn-icon">👤</span><span>Profile</span></a>
+  </nav>
+  <div class="sidebar-bottom">
+    <div class="sidebar-user">
+      <div class="su-avatar">D</div>
+      <div class="su-info"><span class="su-name">David A.</span><span class="su-type">UTME Student</span></div>
+    </div>
+    <a href="login.html" class="sn-item sn-logout"><span class="sn-icon">🚪</span><span>Logout</span></a>
+  </div>
+</aside>
+
+<main class="dashboard-main quiz-main">
+  <button class="sidebar-toggle" id="sidebarToggle">☰</button>
+
+  <!-- QUIZ SETUP SCREEN -->
+  <div class="quiz-setup" id="quizSetup">
+    <div class="qs-header">
+      <h1>Start a Practice Session</h1>
+      <p>Choose a subject and topic, or let the system recommend based on your weak areas</p>
+    </div>
+    <div class="qs-options">
+      <!-- BACKEND NOTE: Populate subjects and topics from /api/subjects with topics and mastery data -->
+      <div class="qs-card">
+        <h3>📊 Adaptive Session (Recommended)</h3>
+        <p>The system picks questions based on your mastery scores — focusing on weak areas first.</p>
+        <div class="qs-info-chips">
+          <span>🎯 Targets weak topics</span>
+          <span>⬆ Progressive difficulty</span>
+          <span>🔄 Spaced repetition</span>
+        </div>
+        <button class="btn btn-primary btn-full" onclick="startAdaptiveQuiz()">Start Adaptive Session</button>
+      </div>
+      <div class="qs-card">
+        <h3>📚 Choose a Subject</h3>
+        <div class="form-group">
+          <label>Subject</label>
+          <select id="subjectSelect" onchange="loadTopics()">
+            <option value="">-- Select Subject --</option>
+            <option value="mathematics">Mathematics</option>
+            <option value="english">English Language</option>
+            <option value="biology">Biology</option>
+            <option value="chemistry">Chemistry</option>
+            <option value="physics">Physics</option>
+          </select>
+        </div>
+        <div class="form-group" id="topicGroup" style="display:none">
+          <label>Topic <span class="optional">(optional — leave blank for full subject)</span></label>
+          <!-- BACKEND NOTE: Topics populated via AJAX from /api/subjects/{id}/topics -->
+          <select id="topicSelect">
+            <option value="">All Topics</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Number of Questions</label>
+          <div class="num-btns">
+            <button class="num-btn active" data-num="10" onclick="setNumQ(this)">10</button>
+            <button class="num-btn" data-num="20" onclick="setNumQ(this)">20</button>
+            <button class="num-btn" data-num="30" onclick="setNumQ(this)">30</button>
+            <button class="num-btn" data-num="40" onclick="setNumQ(this)">40</button>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Difficulty</label>
+          <div class="radio-group">
+            <label class="radio-option"><input type="radio" name="difficulty" value="adaptive" checked/><span class="radio-custom"></span>Adaptive (Auto)</label>
+            <label class="radio-option"><input type="radio" name="difficulty" value="easy"/><span class="radio-custom"></span>Easy</label>
+            <label class="radio-option"><input type="radio" name="difficulty" value="medium"/><span class="radio-custom"></span>Medium</label>
+            <label class="radio-option"><input type="radio" name="difficulty" value="hard"/><span class="radio-custom"></span>Hard</label>
+          </div>
+        </div>
+        <button class="btn btn-primary btn-full" onclick="startCustomQuiz()">Start Session</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- QUIZ ACTIVE SCREEN -->
+  <div class="quiz-active hidden" id="quizActive">
+    <div class="quiz-header-bar">
+      <div class="qhb-left">
+        <button class="btn btn-ghost btn-sm" onclick="exitQuiz()">← Exit</button>
+        <span class="qhb-subject" id="qhbSubject">Biology</span>
+        <span class="qhb-topic" id="qhbTopic">Cell Division</span>
+      </div>
+      <div class="qhb-center">
+        <!-- BACKEND NOTE: Question counter updated via JS from fetched question array -->
+        <span class="qhb-counter"><span id="qCurrent">1</span> of <span id="qTotal">20</span></span>
+        <div class="qhb-progress-bar">
+          <div class="qhb-progress-fill" id="qProgressFill" style="width: 5%"></div>
+        </div>
+      </div>
+      <div class="qhb-right">
+        <div class="quiz-timer" id="quizTimer">
+          <span>⏱</span> <span id="timerDisplay">00:00</span>
+        </div>
+        <div class="quiz-streak-mini" id="streakMini">
+          <span>🔥</span> <span id="streakNum">0</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="quiz-content">
+      <div class="quiz-meta">
+        <!-- BACKEND NOTE: Difficulty, type, and topic tags populated per question from API -->
+        <span class="qmeta-tag tag-difficulty" id="qDifficulty">Medium</span>
+        <span class="qmeta-tag tag-type" id="qType">Conceptual</span>
+        <span class="qmeta-tag tag-topic" id="qTopicTag">Cell Division</span>
+      </div>
+
+      <!-- BACKEND NOTE: Question text fetched from /api/quiz/session/{id}/next -->
+      <div class="question-block">
+        <p class="question-number">Question <span id="qNumDisplay">1</span></p>
+        <p class="question-text" id="questionText">
+          Loading question...
+        </p>
+      </div>
+
+      <!-- BACKEND NOTE: Options populated from question data. On answer, POST to /api/quiz/answer -->
+      <div class="options-grid" id="optionsGrid">
+        <button class="option-btn" data-opt="A" onclick="selectOption(this)">
+          <span class="opt-letter">A</span>
+          <span class="opt-text" id="optA">Option A</span>
+        </button>
+        <button class="option-btn" data-opt="B" onclick="selectOption(this)">
+          <span class="opt-letter">B</span>
+          <span class="opt-text" id="optB">Option B</span>
+        </button>
+        <button class="option-btn" data-opt="C" onclick="selectOption(this)">
+          <span class="opt-letter">C</span>
+          <span class="opt-text" id="optC">Option C</span>
+        </button>
+        <button class="option-btn" data-opt="D" onclick="selectOption(this)">
+          <span class="opt-letter">D</span>
+          <span class="opt-text" id="optD">Option D</span>
+        </button>
+      </div>
+
+      <!-- FEEDBACK PANEL (shown after answering) -->
+      <div class="feedback-panel hidden" id="feedbackPanel">
+        <div class="fp-icon" id="fpIcon"></div>
+        <div class="fp-content">
+          <h3 id="fpTitle"></h3>
+          <!-- BACKEND NOTE: Explanation fetched from question data -->
+          <p id="fpExplanation"></p>
+          <div class="fp-meta" id="fpMeta"></div>
+        </div>
+        <button class="btn btn-primary" id="nextBtn" onclick="nextQuestion()">
+          Next Question →
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- QUIZ RESULTS SCREEN -->
+  <div class="quiz-results hidden" id="quizResults">
+    <div class="qr-container">
+      <div class="qr-header">
+        <div class="qr-icon" id="qrIcon">🎉</div>
+        <h1 id="qrTitle">Session Complete!</h1>
+        <p id="qrSubtitle">Here's how you did</p>
+      </div>
+      <!-- BACKEND NOTE: All values populated from POST /api/quiz/complete response -->
+      <div class="qr-stats">
+        <div class="qrs-item">
+          <span class="qrs-num" id="qrScore">0</span>
+          <span class="qrs-label">Score</span>
+        </div>
+        <div class="qrs-item">
+          <span class="qrs-num" id="qrCorrect">0</span>
+          <span class="qrs-label">Correct</span>
+        </div>
+        <div class="qrs-item">
+          <span class="qrs-num" id="qrTime">0:00</span>
+          <span class="qrs-label">Time</span>
+        </div>
+        <div class="qrs-item">
+          <span class="qrs-num" id="qrMasteryChange">+0%</span>
+          <span class="qrs-label">Mastery Change</span>
+        </div>
+      </div>
+
+      <div class="qr-breakdown" id="qrBreakdown">
+        <!-- BACKEND NOTE: Question review list from session results -->
+      </div>
+
+      <!-- ADAPTIVE FEEDBACK -->
+      <div class="qr-adaptive-msg" id="qrAdaptiveMsg">
+        <!-- BACKEND NOTE: Next recommendation from adaptive engine after session -->
+      </div>
+
+      <div class="qr-actions">
+        <button class="btn btn-primary btn-lg" onclick="practiceAgain()">Practice Again</button>
+        <a href="dashboard.html" class="btn btn-outline btn-lg">Back to Dashboard</a>
+        <a href="progress.html" class="btn btn-ghost btn-lg">View Progress</a>
+      </div>
+    </div>
+  </div>
+</main>
+
+<script src="app.js"></script>
+</body>
+</html>
