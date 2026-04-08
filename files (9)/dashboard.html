@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dashboard — RBAPS</title>
+  <link rel="stylesheet" href="../css/style.css"/>
+  <link rel="stylesheet" href="../css/nav.css"/>
+  <link rel="stylesheet" href="../css/dashboard.css"/>
+</head>
+<body>
+<div class="app-shell">
+
+  <!-- Sidebar -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-logo">
+      <div class="logo-mark">
+        <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="#fff" stroke-width="2">
+          <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+        </svg>
+      </div>
+      <div class="logo-text">RBA<span>PS</span></div>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="nav-section-label">Main</div>
+      <div class="nav-item active" data-page="dashboard.html">
+        <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+          <rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/>
+          <rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/>
+        </svg>
+        Dashboard
+      </div>
+      <div class="nav-item" data-page="practice.html">
+        <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+          <polygon points="5 3 19 12 5 21 5 3"/>
+        </svg>
+        Practice
+      </div>
+      <div class="nav-item" data-page="analytics.html">
+        <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+          <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+        </svg>
+        Analytics
+      </div>
+      <div class="nav-section-label" style="margin-top:8px">Subjects</div>
+      <div class="nav-item" data-page="practice.html"><span style="font-size:1rem">📐</span> Mathematics</div>
+      <div class="nav-item" data-page="practice.html"><span style="font-size:1rem">📝</span> English</div>
+      <div class="nav-item" data-page="practice.html"><span style="font-size:1rem">🧬</span> Biology</div>
+      <div class="nav-item" data-page="practice.html"><span style="font-size:1rem">⚗️</span> Chemistry</div>
+      <div class="nav-item" data-page="practice.html"><span style="font-size:1rem">⚡</span> Physics</div>
+      <div class="nav-section-label" style="margin-top:8px">Account</div>
+      <div class="nav-item" data-page="profile.html">
+        <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
+        </svg>
+        Profile
+      </div>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="user-pill">
+        <div class="user-avatar">D</div>
+        <div class="user-info">
+          <div class="user-name">David Anjorin</div>
+          <div class="user-role">UTME &amp; SSCE</div>
+        </div>
+        <a href="login.html" title="Logout" style="color:var(--ink-3);display:flex;align-items:center;margin-left:auto;">
+          <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+            <polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <!-- Mobile top bar -->
+    <div style="display:flex;align-items:center;gap:12px;padding:14px 20px;border-bottom:1px solid var(--border);background:var(--surface);position:sticky;top:0;z-index:50;" class="mobile-topbar-inner">
+      <button class="hamburger" id="hamburger-btn" aria-label="Open menu">
+        <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
+        </svg>
+      </button>
+      <span style="font-family:var(--font-display);font-size:1rem;">RBAPS</span>
+    </div>
+
+    <div class="page-header">
+      <div class="page-title-wrap">
+        <h1 class="page-title fade-up">Good morning, David 👋</h1>
+        <p class="page-subtitle fade-up fade-up-d1">Here's your preparation overview</p>
+      </div>
+      <a href="practice.html" class="btn btn-primary fade-up fade-up-d2">
+        <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        Start Practice
+      </a>
+    </div>
+
+    <div class="page-body">
+
+      <!-- Welcome Banner -->
+      <div class="welcome-banner fade-up fade-up-d1">
+        <div class="welcome-text">
+          <h2>You have 3 weak topics that need attention</h2>
+          <p>Your adaptive engine has identified areas where focused practice will improve your mastery the fastest.</p>
+        </div>
+        <div class="welcome-action">
+          <a href="practice.html" class="btn btn-lg">Practice Weak Topics →</a>
+        </div>
+      </div>
+
+      <!-- Stats -->
+      <div class="stats-grid mt-24 fade-up fade-up-d2">
+        <div class="stat-card">
+          <div class="stat-card-top">
+            <div>
+              <div class="stat-value">24</div>
+              <div class="stat-label">Sessions Completed</div>
+            </div>
+            <div class="stat-icon green">
+              <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+          </div>
+          <div class="stat-trend up">▲ 4 this week</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card-top">
+            <div>
+              <div class="stat-value">63%</div>
+              <div class="stat-label">Average Mastery</div>
+            </div>
+            <div class="stat-icon accent">
+              <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+            </div>
+          </div>
+          <div class="stat-trend up">▲ 5% this month</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card-top">
+            <div>
+              <div class="stat-value">312</div>
+              <div class="stat-label">Questions Attempted</div>
+            </div>
+            <div class="stat-icon gold">
+              <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </div>
+          </div>
+          <div class="stat-trend up">▲ 48 this week</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card-top">
+            <div>
+              <div class="stat-value">3</div>
+              <div class="stat-label">Mastered Topics</div>
+            </div>
+            <div class="stat-icon amber">
+              <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            </div>
+          </div>
+          <div class="stat-trend up">▲ 1 this week</div>
+        </div>
+      </div>
+
+      <!-- Subject Cards -->
+      <div class="mt-32">
+        <div class="section-header">
+          <h3>Subject Mastery</h3>
+          <a href="analytics.html" class="btn btn-ghost btn-sm">View details →</a>
+        </div>
+        <div class="subject-cards-grid fade-up fade-up-d3">
+          <!-- Mathematics -->
+          <div class="subject-card" onclick="window.location.href='practice.html'">
+            <div class="subject-card-top">
+              <div class="subject-icon" style="background:#EBF4EF;">📐</div>
+              <span class="badge badge-accent">68%</span>
+            </div>
+            <div>
+              <h4>Mathematics</h4>
+              <p class="topic-count">8 topics · 3 weak</p>
+            </div>
+            <div class="subject-mastery">
+              <div class="subject-mastery-row">
+                <span style="font-size:.78rem;color:var(--ink-3);">Mastery</span>
+                <span class="subject-mastery-pct">68%</span>
+              </div>
+              <div class="progress-bar-wrap"><div class="progress-bar-fill gold" style="width:68%"></div></div>
+            </div>
+          </div>
+          <!-- English -->
+          <div class="subject-card" onclick="window.location.href='practice.html'">
+            <div class="subject-card-top">
+              <div class="subject-icon" style="background:#E8F5EE;">📝</div>
+              <span class="badge badge-green">74%</span>
+            </div>
+            <div>
+              <h4>English Language</h4>
+              <p class="topic-count">6 topics · 1 weak</p>
+            </div>
+            <div class="subject-mastery">
+              <div class="subject-mastery-row">
+                <span style="font-size:.78rem;color:var(--ink-3);">Mastery</span>
+                <span class="subject-mastery-pct">74%</span>
+              </div>
+              <div class="progress-bar-wrap"><div class="progress-bar-fill" style="width:74%"></div></div>
+            </div>
+          </div>
+          <!-- Biology -->
+          <div class="subject-card" onclick="window.location.href='practice.html'">
+            <div class="subject-card-top">
+              <div class="subject-icon" style="background:#FEF5E4;">🧬</div>
+              <span class="badge badge-amber">55%</span>
+            </div>
+            <div>
+              <h4>Biology</h4>
+              <p class="topic-count">6 topics · 3 weak</p>
+            </div>
+            <div class="subject-mastery">
+              <div class="subject-mastery-row">
+                <span style="font-size:.78rem;color:var(--ink-3);">Mastery</span>
+                <span class="subject-mastery-pct">55%</span>
+              </div>
+              <div class="progress-bar-wrap"><div class="progress-bar-fill amber" style="width:55%"></div></div>
+            </div>
+          </div>
+          <!-- Chemistry -->
+          <div class="subject-card" onclick="window.location.href='practice.html'">
+            <div class="subject-card-top">
+              <div class="subject-icon" style="background:#FBF5EB;">⚗️</div>
+              <span class="badge badge-gold">62%</span>
+            </div>
+            <div>
+              <h4>Chemistry</h4>
+              <p class="topic-count">6 topics · 2 weak</p>
+            </div>
+            <div class="subject-mastery">
+              <div class="subject-mastery-row">
+                <span style="font-size:.78rem;color:var(--ink-3);">Mastery</span>
+                <span class="subject-mastery-pct">62%</span>
+              </div>
+              <div class="progress-bar-wrap"><div class="progress-bar-fill gold" style="width:62%"></div></div>
+            </div>
+          </div>
+          <!-- Physics -->
+          <div class="subject-card" onclick="window.location.href='practice.html'">
+            <div class="subject-card-top">
+              <div class="subject-icon" style="background:#FDEDEB;">⚡</div>
+              <span class="badge badge-red">58%</span>
+            </div>
+            <div>
+              <h4>Physics</h4>
+              <p class="topic-count">6 topics · 2 weak</p>
+            </div>
+            <div class="subject-mastery">
+              <div class="subject-mastery-row">
+                <span style="font-size:.78rem;color:var(--ink-3);">Mastery</span>
+                <span class="subject-mastery-pct">58%</span>
+              </div>
+              <div class="progress-bar-wrap"><div class="progress-bar-fill amber" style="width:58%"></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom Two-Column -->
+      <div class="grid grid-2 mt-32 fade-up fade-up-d4" style="align-items:start">
+
+        <!-- Recent Sessions -->
+        <div class="card">
+          <div class="card-header">
+            <h3 style="font-size:1rem;">Recent Sessions</h3>
+            <a href="analytics.html" class="btn btn-ghost btn-sm">See all</a>
+          </div>
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Subject</th><th>Year</th><th>Score</th><th>Date</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><span class="subject-pill">📐 Mathematics</span></td>
+                  <td>2023</td><td><strong>72%</strong></td><td>12 Jun 2025</td>
+                </tr>
+                <tr>
+                  <td><span class="subject-pill">🧬 Biology</span></td>
+                  <td>2022</td><td><strong>55%</strong></td><td>10 Jun 2025</td>
+                </tr>
+                <tr>
+                  <td><span class="subject-pill">⚗️ Chemistry</span></td>
+                  <td>2024</td><td><strong>60%</strong></td><td>08 Jun 2025</td>
+                </tr>
+                <tr>
+                  <td><span class="subject-pill">⚡ Physics</span></td>
+                  <td>2023</td><td><strong>48%</strong></td><td>06 Jun 2025</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Focus Areas -->
+        <div class="card">
+          <div class="card-header">
+            <h3 style="font-size:1rem;">Recommended Focus Areas</h3>
+            <span class="badge badge-red">Needs Attention</span>
+          </div>
+          <div class="card-body">
+            <div class="focus-list">
+              <div class="focus-item" onclick="window.location.href='practice.html'">
+                <div class="focus-num">1</div>
+                <div class="focus-info">
+                  <div class="focus-name">Genetics</div>
+                  <div class="focus-sub">Biology</div>
+                </div>
+                <div class="focus-pct">38%</div>
+              </div>
+              <div class="focus-item" onclick="window.location.href='practice.html'">
+                <div class="focus-num">2</div>
+                <div class="focus-info">
+                  <div class="focus-name">Nuclear Physics</div>
+                  <div class="focus-sub">Physics</div>
+                </div>
+                <div class="focus-pct">38%</div>
+              </div>
+              <div class="focus-item" onclick="window.location.href='practice.html'">
+                <div class="focus-num">3</div>
+                <div class="focus-info">
+                  <div class="focus-name">Sequences &amp; Series</div>
+                  <div class="focus-sub">Mathematics</div>
+                </div>
+                <div class="focus-pct">35%</div>
+              </div>
+              <div class="focus-item" onclick="window.location.href='practice.html'">
+                <div class="focus-num">4</div>
+                <div class="focus-info">
+                  <div class="focus-name">Thermodynamics</div>
+                  <div class="focus-sub">Physics</div>
+                </div>
+                <div class="focus-pct">42%</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /page-body -->
+  </main>
+</div>
+
+<div id="toast-container"></div>
+<script src="../js/main.js"></script>
+<script>
+document.querySelector('.hamburger')?.addEventListener('click', () => {
+  document.getElementById('sidebar').classList.add('open');
+  document.getElementById('sidebar-overlay').classList.add('open');
+});
+document.getElementById('sidebar-overlay')?.addEventListener('click', () => {
+  document.getElementById('sidebar').classList.remove('open');
+  document.getElementById('sidebar-overlay').classList.remove('open');
+});
+</script>
+</body>
+</html>

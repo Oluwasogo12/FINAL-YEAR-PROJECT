@@ -1,0 +1,101 @@
+/* =========================================================
+   RBAPS — Auth Pages CSS
+   ========================================================= */
+
+.auth-page {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+/* ── Left Panel ─────────────────────────────────────────── */
+.auth-panel-left {
+  background: var(--accent);
+  display: flex; flex-direction: column;
+  justify-content: space-between;
+  padding: 48px;
+  position: relative; overflow: hidden;
+}
+.auth-panel-left::before {
+  content: '';
+  position: absolute; top: -100px; right: -100px;
+  width: 350px; height: 350px; border-radius: 50%;
+  background: rgba(255,255,255,.06);
+}
+.auth-panel-left::after {
+  content: '';
+  position: absolute; bottom: -60px; left: -60px;
+  width: 250px; height: 250px; border-radius: 50%;
+  background: rgba(255,255,255,.05);
+}
+.auth-logo { display: flex; align-items: center; gap: 12px; }
+.auth-logo .logo-mark {
+  width: 38px; height: 38px; border-radius: 11px;
+  background: rgba(255,255,255,.2);
+  display: flex; align-items: center; justify-content: center;
+}
+.auth-logo .logo-text { font-family: var(--font-display); color: #fff; font-size: 1.1rem; }
+
+.auth-panel-copy { position: relative; z-index: 1; }
+.auth-panel-copy h1 { color: #fff; font-size: clamp(1.7rem, 3.5vw, 2.4rem); margin-bottom: 16px; }
+.auth-panel-copy p  { color: rgba(255,255,255,.75); font-size: .95rem; line-height: 1.7; max-width: 380px; }
+
+.auth-stats {
+  display: flex; gap: 24px; position: relative; z-index: 1;
+}
+.auth-stat { }
+.auth-stat .num  { font-family: var(--font-display); font-size: 1.8rem; color: #fff; }
+.auth-stat .lbl  { font-size: .8rem; color: rgba(255,255,255,.65); margin-top: 2px; }
+
+/* ── Right Panel ────────────────────────────────────────── */
+.auth-panel-right {
+  display: flex; align-items: center; justify-content: center;
+  padding: 48px 40px;
+  background: var(--bg);
+  overflow-y: auto;
+}
+.auth-form-wrap {
+  width: 100%; max-width: 400px;
+}
+.auth-form-wrap h2 { margin-bottom: 6px; }
+.auth-form-wrap .auth-sub { color: var(--ink-3); font-size: .875rem; margin-bottom: 28px; }
+
+.auth-form { display: flex; flex-direction: column; gap: 18px; }
+.auth-link-row {
+  display: flex; align-items: center; justify-content: space-between;
+  font-size: .84rem;
+}
+.auth-link { color: var(--accent); font-weight: 500; }
+.auth-link:hover { text-decoration: underline; }
+
+.auth-switch {
+  text-align: center; margin-top: 20px;
+  font-size: .875rem; color: var(--ink-3);
+}
+.auth-switch a { color: var(--accent); font-weight: 500; }
+.auth-switch a:hover { text-decoration: underline; }
+
+/* Password toggle */
+.input-with-icon { position: relative; }
+.input-with-icon .form-control { padding-right: 44px; }
+.input-icon-btn {
+  position: absolute; right: 12px; top: 50%; transform: translateY(-50%);
+  color: var(--ink-3); display: flex; align-items: center;
+  background: none; border: none; cursor: pointer; padding: 2px;
+}
+.input-icon-btn:hover { color: var(--ink); }
+
+/* Checkbox */
+.form-check { display: flex; align-items: center; gap: 10px; cursor: pointer; }
+.form-check input[type="checkbox"] {
+  width: 16px; height: 16px; accent-color: var(--accent); cursor: pointer;
+}
+.form-check label { font-size: .85rem; color: var(--ink-2); cursor: pointer; }
+
+/* Responsive */
+@media (max-width: 768px) {
+  .auth-page { grid-template-columns: 1fr; }
+  .auth-panel-left { display: none; }
+  .auth-panel-right { padding: 32px 24px; align-items: flex-start; padding-top: 80px; }
+  body.auth-body .top-nav { display: flex; }
+}

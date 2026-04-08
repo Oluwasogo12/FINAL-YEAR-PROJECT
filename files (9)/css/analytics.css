@@ -1,0 +1,114 @@
+/* =========================================================
+   RBAPS — Analytics / Performance CSS
+   ========================================================= */
+
+/* ── Filter Bar ─────────────────────────────────────────── */
+.analytics-filter-bar {
+  display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+  padding: 16px 20px;
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); margin-bottom: 24px;
+}
+.filter-label { font-size: .8rem; font-weight: 500; color: var(--ink-3); white-space: nowrap; }
+.filter-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip {
+  padding: 6px 14px; border-radius: 100px;
+  border: 1.5px solid var(--border); background: var(--surface);
+  font-size: .8rem; font-weight: 500; color: var(--ink-2);
+  cursor: pointer; transition: all var(--transition);
+}
+.chip:hover { border-color: var(--accent); color: var(--accent); }
+.chip.active { border-color: var(--accent); background: var(--accent); color: #fff; }
+
+/* ── Mastery Overview Cards ─────────────────────────────── */
+.mastery-overview-grid { display: grid; grid-template-columns: repeat(5,1fr); gap: 14px; }
+.mastery-mini-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 18px 16px;
+  display: flex; flex-direction: column; align-items: center; gap: 10px;
+  text-align: center; transition: all var(--transition); cursor: pointer;
+}
+.mastery-mini-card:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
+.mastery-mini-card.selected { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(46,107,79,.12); }
+.mastery-mini-card .m-subject { font-size: .78rem; font-weight: 500; color: var(--ink-3); }
+.mastery-mini-card .m-icon { font-size: 1.4rem; }
+
+/* ── Main Analytics Layout ──────────────────────────────── */
+.analytics-main { display: grid; grid-template-columns: 1fr 320px; gap: 20px; align-items: start; }
+
+/* ── Topic Mastery Bar Chart ────────────────────────────── */
+.topic-chart-wrap { display: flex; flex-direction: column; gap: 10px; }
+.topic-bar-row {
+  display: grid; grid-template-columns: 160px 1fr 52px;
+  align-items: center; gap: 12px;
+}
+.topic-bar-name { font-size: .82rem; color: var(--ink-2); text-align: right; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.topic-bar-track { height: 10px; background: var(--surface-2); border-radius: 100px; overflow: hidden; }
+.topic-bar-fill {
+  height: 100%; border-radius: 100px;
+  transition: width 1s cubic-bezier(.4,0,.2,1);
+}
+.topic-bar-fill.mastered  { background: var(--green); }
+.topic-bar-fill.developing { background: var(--accent-2); }
+.topic-bar-fill.below     { background: var(--amber); }
+.topic-bar-fill.urgent    { background: var(--red); }
+.topic-bar-pct { font-size: .8rem; font-weight: 600; text-align: right; }
+.topic-bar-pct.mastered   { color: var(--green); }
+.topic-bar-pct.developing { color: var(--accent-2); }
+.topic-bar-pct.below      { color: var(--amber); }
+.topic-bar-pct.urgent     { color: var(--red); }
+
+/* ── Mastery Legend ─────────────────────────────────────── */
+.mastery-legend {
+  display: flex; gap: 16px; flex-wrap: wrap;
+  padding: 14px 0; margin-bottom: 6px;
+}
+.legend-item { display: flex; align-items: center; gap: 6px; }
+.legend-dot  { width: 10px; height: 10px; border-radius: 50%; }
+.legend-dot.mastered  { background: var(--green); }
+.legend-dot.developing { background: var(--accent-2); }
+.legend-dot.below     { background: var(--amber); }
+.legend-dot.urgent    { background: var(--red); }
+.legend-label { font-size: .75rem; color: var(--ink-3); }
+
+/* ── Trend Chart ────────────────────────────────────────── */
+.trend-chart-area {
+  width: 100%; height: 180px; position: relative;
+}
+.trend-chart-area canvas { width: 100% !important; height: 100% !important; }
+
+/* ── Right Panel ────────────────────────────────────────── */
+.analytics-right { display: flex; flex-direction: column; gap: 16px; }
+
+.focus-areas-list { display: flex; flex-direction: column; gap: 8px; }
+.focus-area-item {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 12px; border-radius: var(--radius-md);
+  background: var(--surface-2); border: 1px solid var(--border);
+  cursor: pointer; transition: all var(--transition);
+}
+.focus-area-item:hover { background: var(--red-lt); border-color: var(--red); }
+.fa-rank {
+  width: 24px; height: 24px; border-radius: 50%;
+  background: var(--red); color: #fff;
+  font-size: .7rem; font-weight: 700;
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.fa-info { flex: 1; min-width: 0; }
+.fa-name { font-size: .83rem; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.fa-sub  { font-size: .72rem; color: var(--ink-3); }
+.fa-score { font-size: .82rem; font-weight: 700; color: var(--red); flex-shrink: 0; }
+
+/* ── Session History Table ──────────────────────────────── */
+.history-card .data-table td:first-child { font-weight: 500; color: var(--ink); }
+
+/* ── Responsive ─────────────────────────────────────────── */
+@media (max-width: 1100px) {
+  .mastery-overview-grid { grid-template-columns: repeat(3,1fr); }
+  .analytics-main { grid-template-columns: 1fr; }
+}
+@media (max-width: 640px) {
+  .mastery-overview-grid { grid-template-columns: repeat(3,1fr); }
+  .topic-bar-row { grid-template-columns: 90px 1fr 40px; }
+  .topic-bar-name { font-size: .75rem; }
+}

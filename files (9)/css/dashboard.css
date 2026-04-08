@@ -1,0 +1,139 @@
+/* =========================================================
+   RBAPS — Dashboard CSS
+   ========================================================= */
+
+/* ── Welcome Banner ─────────────────────────────────────── */
+.welcome-banner {
+  background: var(--accent);
+  border-radius: var(--radius-xl);
+  padding: 28px 32px;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 20px; overflow: hidden; position: relative;
+}
+.welcome-banner::after {
+  content: '';
+  position: absolute; right: -40px; top: -60px;
+  width: 220px; height: 220px; border-radius: 50%;
+  background: rgba(255,255,255,.07);
+}
+.welcome-banner::before {
+  content: '';
+  position: absolute; right: 120px; bottom: -80px;
+  width: 160px; height: 160px; border-radius: 50%;
+  background: rgba(255,255,255,.05);
+}
+.welcome-text h2 { color: #fff; margin-bottom: 6px; }
+.welcome-text p  { color: rgba(255,255,255,.75); font-size: .9rem; }
+.welcome-action  { position: relative; z-index: 1; flex-shrink: 0; }
+.welcome-action .btn {
+  background: #fff; color: var(--accent); font-weight: 600;
+  box-shadow: 0 4px 16px rgba(0,0,0,.15);
+}
+.welcome-action .btn:hover { background: #f0f0f0; transform: translateY(-1px); }
+
+/* ── Stats Row ──────────────────────────────────────────── */
+.stats-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 16px; }
+.stat-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 20px 22px;
+  display: flex; flex-direction: column; gap: 12px;
+  transition: box-shadow var(--transition), transform var(--transition);
+}
+.stat-card:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
+.stat-card-top { display: flex; align-items: flex-start; justify-content: space-between; }
+.stat-icon {
+  width: 40px; height: 40px; border-radius: var(--radius-md);
+  display: flex; align-items: center; justify-content: center;
+}
+.stat-icon.green  { background: var(--green-lt);  color: var(--green); }
+.stat-icon.amber  { background: var(--amber-lt);  color: var(--amber); }
+.stat-icon.accent { background: var(--accent-lt); color: var(--accent); }
+.stat-icon.gold   { background: var(--accent-2-lt); color: var(--accent-2); }
+.stat-value  { font-family: var(--font-display); font-size: 2rem; color: var(--ink); line-height: 1; }
+.stat-label  { font-size: .8rem; color: var(--ink-3); margin-top: 2px; }
+.stat-trend  { display: flex; align-items: center; gap: 4px; font-size: .78rem; }
+.stat-trend.up   { color: var(--green); }
+.stat-trend.down { color: var(--red); }
+
+/* ── Subject Cards ──────────────────────────────────────── */
+.subject-cards-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
+.subject-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  cursor: pointer;
+  transition: all var(--transition);
+  display: flex; flex-direction: column; gap: 14px;
+}
+.subject-card:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); border-color: var(--accent); }
+.subject-card-top { display: flex; align-items: center; justify-content: space-between; }
+.subject-icon {
+  width: 44px; height: 44px; border-radius: var(--radius-md);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.3rem;
+}
+.subject-card h4 { font-size: 1rem; margin-top: 4px; }
+.subject-card .topic-count { font-size: .8rem; color: var(--ink-3); }
+.subject-mastery { display: flex; flex-direction: column; gap: 6px; }
+.subject-mastery-row { display: flex; align-items: center; justify-content: space-between; }
+.subject-mastery-pct { font-weight: 600; font-size: .9rem; color: var(--ink); }
+
+/* ── Section heading ────────────────────────────────────── */
+.section-header {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 16px;
+}
+.section-header h3 { font-size: 1.05rem; }
+
+/* ── Recent Sessions Table ──────────────────────────────── */
+.table-wrap { overflow-x: auto; }
+.data-table { width: 100%; border-collapse: collapse; }
+.data-table th {
+  text-align: left; padding: 10px 16px;
+  font-size: .75rem; font-weight: 600; letter-spacing: .05em; text-transform: uppercase;
+  color: var(--ink-3); border-bottom: 1px solid var(--border);
+}
+.data-table td {
+  padding: 13px 16px; font-size: .875rem; color: var(--ink-2);
+  border-bottom: 1px solid var(--border);
+}
+.data-table tr:last-child td { border-bottom: none; }
+.data-table tr:hover td { background: var(--surface-2); }
+.data-table .subject-pill {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: .8rem; font-weight: 500; color: var(--ink);
+}
+
+/* ── Recommended Topics ─────────────────────────────────── */
+.focus-list { display: flex; flex-direction: column; gap: 10px; }
+.focus-item {
+  display: flex; align-items: center; gap: 12px;
+  padding: 12px 14px; border-radius: var(--radius-md);
+  background: var(--surface-2); border: 1px solid var(--border);
+  transition: all var(--transition); cursor: pointer;
+}
+.focus-item:hover { background: var(--accent-lt); border-color: var(--accent); }
+.focus-num {
+  width: 26px; height: 26px; border-radius: 50%;
+  background: var(--accent); color: #fff;
+  font-size: .75rem; font-weight: 600;
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.focus-info { flex: 1; min-width: 0; }
+.focus-name { font-size: .875rem; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.focus-sub  { font-size: .75rem; color: var(--ink-3); }
+.focus-pct  { font-size: .8rem; font-weight: 600; color: var(--red); flex-shrink: 0; }
+
+/* ── Responsive ─────────────────────────────────────────── */
+@media (max-width: 1100px) {
+  .stats-grid { grid-template-columns: repeat(2,1fr); }
+  .subject-cards-grid { grid-template-columns: repeat(2,1fr); }
+}
+@media (max-width: 640px) {
+  .stats-grid { grid-template-columns: repeat(2,1fr); }
+  .subject-cards-grid { grid-template-columns: 1fr; }
+  .welcome-banner { flex-direction: column; align-items: flex-start; }
+}
